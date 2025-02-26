@@ -8,14 +8,37 @@
 import SwiftUI
 
 struct ContentView: View {
+    // @State var photos = [Photo]()
+    @State var photos = [Photo(image: UIImage(systemName: "ladybug")!, name: "Ladybug", date: Date())]
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack {
+            List {
+                ForEach(photos) { photo in
+                    RowView(photo: photo)
+                        .padding()
+                }
+                .onDelete {
+                    if let index = $0.first {
+                        photos.remove(at: index)
+                    }
+                }
+                .onMove {
+                    photos.move(fromOffsets: $0, toOffset: $1)
+                }
+            }
+            .navigationTitle("Photos")
+            .toolbar {
+                HStack {
+                    EditButton()
+                    Button(action: {
+                        photos.insert(Photo(image: UIImage(systemName: "ladybug")!, name: "Ladybug", date: Date()), at: 0)
+                    }, label: {
+                        Image(systemName: "plus")
+                    })
+                }
+                .padding()
+            }
         }
-        .padding()
     }
 }
 
