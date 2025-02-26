@@ -8,11 +8,17 @@
 import SwiftUI
 
 struct RowView: View {
+    var photo: Photo
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        GeometryReader { geometry in
+            Image(uiImage: photo.image)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+        }
     }
 }
-
-#Preview {
-    RowView()
-}
+//
+//#Preview {
+//    @Previewable @State var photo = Photo(image: UIImage(systemName: "ladybug")!, name: "Ladybug", date: Date())
+//    RowView()
+//}

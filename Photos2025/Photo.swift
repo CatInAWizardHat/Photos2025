@@ -8,7 +8,7 @@ import UIKit
 import Observation
 
 @Observable
-class Photo {
+class Photo: Identifiable {
     var image: UIImage
     var name: String
     var date: Date
