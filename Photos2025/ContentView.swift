@@ -14,8 +14,12 @@ struct ContentView: View {
         NavigationStack {
             List {
                 ForEach(photos) { photo in
-                    RowView(photo: photo)
-                        .padding()
+                    @State var photo: Photo = photo
+                    NavigationLink(destination: DetailView(photo: photo)
+                                   , label: {
+                        RowView(photo: photo)
+                            .padding()
+                    })
                 }
                 .onDelete {
                     if let index = $0.first {
