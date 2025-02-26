@@ -6,9 +6,10 @@
 //
 import UIKit
 import Observation
+import SwiftData
 
-@Observable
-class Photo: Identifiable {
+@Model
+@Observable class Photo: Identifiable {
     var image: UIImage
     var name: String
     var date: Date
