@@ -10,7 +10,15 @@ import SwiftData
 
 @Model
 @Observable class Photo: Identifiable {
-    var image: UIImage
+    private var imageAsData: Data
+    var image: UIImage {
+        get {
+            UIImage(data: imageAsData)!
+        }
+        set {
+            imageAsData = newValue.pngData()!
+        }
+    }
     var name: String
     var date: Date
     
