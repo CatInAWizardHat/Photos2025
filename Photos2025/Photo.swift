@@ -8,12 +8,11 @@ import UIKit
 import Observation
 import SwiftData
 
-@Model
-@Observable class Photo: Identifiable {
+@Model class Photo: Identifiable {
     private var imageAsData: Data
     var image: UIImage {
         get {
-            UIImage(data: imageAsData)!
+            UIImage(data: imageAsData) ?? UIImage(systemName: "Photo")!
         }
         set {
             imageAsData = newValue.pngData()!
@@ -23,8 +22,8 @@ import SwiftData
     var date: Date
     
     init(image: UIImage, name: String, date: Date) {
-        self.image = image
         self.name = name
         self.date = date
+        self.imageAsData = image.pngData()!
     }
 }
