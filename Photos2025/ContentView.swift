@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ContentView: View {
     // @State var photos = [Photo]()
-    @State var photos = [Photo(image: UIImage(systemName: "ladybug")!, name: "Ladybug", date: Date())]
+    @Query var photos: [Photo] = [Photo(image: UIImage(systemName: "ladybug")!, name: "Ladybug", date: Date())]
+    @Environment(\.modelContext) private var modelContext
     var body: some View {
         NavigationStack {
             List {
@@ -23,19 +25,19 @@ struct ContentView: View {
                 }
                 .onDelete {
                     if let index = $0.first {
-                        photos.remove(at: index)
+                        modelContext.delete(photos[index])
                     }
                 }
-                .onMove {
-                    photos.move(fromOffsets: $0, toOffset: $1)
-                }
+//                .onMove {
+//                    modelContext.move(fromOffsets: $0, toOffset: $1)
+//                }
             }
             .navigationTitle("Photos")
             .toolbar {
                 HStack {
                     EditButton()
                     Button(action: {
-                        photos.insert(Photo(image: UIImage(systemName: "ladybug")!, name: "Ladybug", date: Date()), at: 0)
+                        modelContext.insert(Photo(image: UIImage(systemName: "ladybug")!, name: "Ladybug", date: Date()))
                     }, label: {
                         Image(systemName: "plus")
                     })
