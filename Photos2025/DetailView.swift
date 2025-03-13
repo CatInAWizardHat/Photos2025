@@ -61,6 +61,19 @@ struct DetailView: View {
                         Image(systemName: "camera")
                     }
                 )
+                Button(
+                    action: {
+                        PHPhotoLibrary.requestAuthorization { status in
+                            if status == .authorized {
+                                self.imageSource = UIImagePickerController.SourceType.photoLibrary
+                                self.pickerVisible = true
+                            }
+                        }
+                    },
+                    label: {
+                        Image(systemName: "book")
+                    }
+                )
             }
         }
         .alert(isPresented: $showCameraAlert) {
