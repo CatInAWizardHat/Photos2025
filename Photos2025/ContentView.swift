@@ -10,8 +10,8 @@ import SwiftData
 
 struct ContentView: View {
     // @State var photos = [Photo]()
-    @Query var photos: [Photo] = [Photo(image: UIImage(systemName: "ladybug")!, name: "Ladybug", date: Date())]
     @Environment(\.modelContext) private var modelContext
+    @Query var photos: [Photo] = [Photo(image: UIImage(systemName: "ladybug")!, name: "Ladybug", date: Date())]
     var body: some View {
         NavigationStack {
             List {

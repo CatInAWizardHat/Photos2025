@@ -15,7 +15,7 @@ import SwiftData
             UIImage(data: imageAsData) ?? UIImage(systemName: "Photo")!
         }
         set {
-            imageAsData = newValue.pngData()!
+            imageAsData = newValue.pngData() ?? Data()
         }
     }
     var name: String
@@ -24,6 +24,6 @@ import SwiftData
     init(image: UIImage, name: String, date: Date) {
         self.name = name
         self.date = date
-        self.imageAsData = image.pngData()!
+        self.imageAsData = image.pngData() ?? Data()
     }
 }
